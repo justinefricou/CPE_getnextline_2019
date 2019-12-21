@@ -60,18 +60,18 @@ int get_buffer(char **buffer, int fd)
 
 int put_buffer_in_line(char *buffer, char **line) // ne pas mettre \n
 {
-    int length_new_chunk = 0;
-    int length_line = 0;
+    int chunk_len = 0;
+    int line_len = 0;
 
-    for ( ; buffer[i] != '\n' && buffer[i] != 0; length_new_chunk++);
+    for ( ; buffer[chunk_len] != '\n' && buffer[chunk_len] != 0; chunk_len++);
     if (line != NULL)
-        for ( ; line[length_line] != 0; length_line++);
-    *line = malloc(sizeof(char) * (length_new_chunk + length_line + 1));
+        for ( ; line[line_len] != 0; line_len++);
+    *line = malloc(sizeof(char) * (chunk_len + line_len + 1));
     if (*line == NULL)
         return (84);
-    for (int i = 0; i < length_new_chunk; i++)
-        (*line)[length_line + i] = buffer[i];
-    (*line)[length_line + length_new_chunk] = 0;
+    for (int i = 0; i < chunk_len; i++)
+        (*line)[line_len + i] = buffer[i];
+    (*line)[line_len + chunk_len] = 0;
     for (int i = 0; i < READ_SIZE; i++)
         buffer[i] = 0;
     return (0);
