@@ -12,6 +12,8 @@ char *get_next_line(int fd)
     static char *buffer = NULL;
     char *line = NULL;
 
+    if (READ_SIZE <= 0)
+        return (NULL);
     do {
         if (get_buffer(&buffer, fd) == 84)
             return (NULL);
